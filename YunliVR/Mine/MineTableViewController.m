@@ -8,12 +8,16 @@
 
 #import "MineTableViewController.h"
 #import "MineTableViewCell.h"
+#import "HSDownloadManager.h"
+#import "AppDelegate.h"
+#import <UIColor+Wonderful.h>
 
 /**
  *  常量
  */
-NSString * const myVideosSegue = @"myVideosSegue";
-NSString * const aboutSegue = @"aboutSegue";
+NSString * const myVideosPageSegue = @"myVideosPageSegue";
+NSString * const helpPageSegue = @"helpPageSegue";
+NSString * const aboutPageSegue = @"aboutPageSegue";
 
 
 
@@ -27,7 +31,7 @@ NSString * const aboutSegue = @"aboutSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor lightGrayColor];
+    self.tableView.backgroundColor = [UIColor whiteSmoke];
 
 //    // 解决tableViewCell被NavigationBar遮住的问题
 //    CGRect rect = self.navigationController.navigationBar.frame;
@@ -43,6 +47,10 @@ NSString * const aboutSegue = @"aboutSegue";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,54 +63,83 @@ NSString * const aboutSegue = @"aboutSegue";
 
 // 修改footer的颜色
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    view.tintColor = [UIColor lightGrayColor];
+    view.tintColor = [UIColor whiteSmoke];
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        // banner
+        return 1;
     } else if (section == 1) {
-        return 3;
+        return 2;
     } else {
-        return 0;
+        return 2;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSInteger currentRealRowNumeber = (indexPath.section > 0 ? [self tableView:tableView numberOfRowsInSection:indexPath.section - 1] : 0) + indexPath.row + 1;
+    NSInteger currentRealRowNumeber = 0;
+    
+    for (NSUInteger i = 0; i < indexPath.section; ++i) {
+        currentRealRowNumeber += [self tableView:tableView numberOfRowsInSection:i];
+    }
+    
+    currentRealRowNumeber = currentRealRowNumeber + indexPath.row + 1;
     
     MineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MineTableViewCell"];
     
+    cell.allowWWANSwitch.hidden = YES;
     
     switch (currentRealRowNumeber) {
         case 1:
-            cell.mineTextLabel.text = @"about~";
-            cell.iconImageView.backgroundColor = [UIColor redColor];
+            cell.iconImageView.hidden = YES;
+            cell.mineTextLabel.hidden = YES;
             break;
+            
         case 2:
-            cell.mineTextLabel.text = @"My videos";
+            cell.mineTextLabel.text = @"我的视频";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            cell.badgeString = @"2";
+            NSUInteger badgeCnt = [[[HSDownloadManager sharedInstance] getTasks] count];
+            
+            if (badgeCnt > 0) {
+                cell.badgeString = [NSString stringWithFormat:@"%lu", (unsigned long)badgeCnt];
+                NSLog(@"current count is : %lu", badgeCnt);
+            } else {
+                cell.badgeString = nil;
+            }
+            
             cell.badge.radius = 8.75;
-//            cell.badgeLeftOffset = 8;
             cell.badgeRightOffset = 40;
             cell.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
             break;
         case 3:
-            cell.mineTextLabel.text = @"3rd setting";
+            cell.mineTextLabel.text = @"仅 Wi-Fi 环境下进行下载";
+            cell.allowWWANSwitch.hidden = NO;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (((AppDelegate *)[UIApplication sharedApplication].delegate).allowWWAN == YES) {
+                cell.allowWWANSwitch.on = NO;
+            } else {
+                cell.allowWWANSwitch.on = YES;
+            }
+            
+            
             break;
         case 4:
-            cell.mineTextLabel.text = @"4th setting";
+            cell.mineTextLabel.text = @"使用帮助";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case 5:
-            cell.mineTextLabel.text = @"5th setting";
+            cell.mineTextLabel.text = @"关于云粒";
+            cell.iconImageView.backgroundColor = [UIColor goldColor];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
     }
     
@@ -111,35 +148,37 @@ NSString * const aboutSegue = @"aboutSegue";
 
 // cell中每一行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.0;
+    if (indexPath.section == 0) return 200;
+    else return 50.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSInteger rowNumber = 0;
-//    for (NSInteger i = 0; i < indexPath.section; ++i) {
-//        rowNumber += [self tableView:tableView numberOfRowsInSection:i];
-//    }
-//    rowNumber += indexPath.row;
-    
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // 计算当下是第几行
-    NSInteger currentRealRowNumeber = (indexPath.section > 0 ? [self tableView:tableView numberOfRowsInSection:indexPath.section - 1] : 0) + indexPath.row + 1;
-
+    NSInteger currentRealRowNumeber = 0;
+    
+    for (NSUInteger i = 0; i < indexPath.section; ++i) {
+        currentRealRowNumeber += [self tableView:tableView numberOfRowsInSection:i];
+    }
+    
+    currentRealRowNumeber = currentRealRowNumeber + indexPath.row + 1;
+    
+    
     NSLog(@"%ld %ld currentrow:%ld", (long)indexPath.section, (long)indexPath.row, (long)currentRealRowNumeber);
     
     switch (currentRealRowNumeber) {
         case 1:
-            [self performSegueWithIdentifier:aboutSegue sender:self];
             break;
         case 2:
-            [self performSegueWithIdentifier:myVideosSegue sender:self];
+            [self performSegueWithIdentifier:myVideosPageSegue sender:self];
             break;
         case 3:
             break;
         case 4:
+            [self performSegueWithIdentifier:helpPageSegue sender:self];
             break;
         case 5:
+            [self performSegueWithIdentifier:aboutPageSegue sender:self];
             break;
     }
     
