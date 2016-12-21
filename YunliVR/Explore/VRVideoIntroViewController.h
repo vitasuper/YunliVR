@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface VRVideoIntroViewController : UIViewController
 
 @property(nonatomic, weak) NSString *coverImgURL;

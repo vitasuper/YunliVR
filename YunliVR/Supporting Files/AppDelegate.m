@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <RealReachability.h>
 #import <BmobSDK/Bmob.h>
 
 @interface AppDelegate ()
@@ -20,7 +21,8 @@
     // Override point for customization after application launch.
     
     [Bmob registerWithAppKey:@"a6639ad8896f7b0c307374117b77bf99"];
-    
+    self.allowWWAN = NO;
+    [GLobalRealReachability startNotifier];
     return YES;
 }
 
