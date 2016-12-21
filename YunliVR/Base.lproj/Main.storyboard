@@ -69,19 +69,6 @@
             </objects>
             <point key="canvasLocation" x="-399" y="-201"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4nt-kL-0At">
-            <objects>
-                <navigationController id="KXj-rA-dGt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zPg-TN-NEt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bxf-9I-5xO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1353" y="-224"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -139,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128.8000000000002" y="-779.46026986506752"/>
+            <point key="canvasLocation" x="2129" y="-618"/>
         </scene>
         <!--Video Intro View Controller-->
         <scene sceneID="03z-qe-Opp">
@@ -159,21 +146,6 @@
                                     <constraint firstAttribute="height" constant="250" id="bLc-ow-3nr"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J2l-it-roy">
-                                <rect key="frame" x="75" y="388" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-WJ-F9d">
-                                <rect key="frame" x="51" y="306" width="256" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UH8-z5-rsw">
                                 <rect key="frame" x="75" y="542" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -190,6 +162,20 @@
                                     <action selector="downloadVRVideo:" destination="Li6-yL-tP8" eventType="touchUpInside" id="gNd-dD-leY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bh-s1-egS">
+                                <rect key="frame" x="51" y="375" width="282" height="167"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-WJ-F9d">
+                                <rect key="frame" x="51" y="342" width="256" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -201,13 +187,13 @@
                     <navigationItem key="navigationItem" id="B6f-Bi-vll"/>
                     <connections>
                         <outlet property="coverImageView" destination="K9w-Xr-mNR" id="M8L-mD-d43"/>
-                        <outlet property="introTextView" destination="J2l-it-roy" id="zt3-ON-jEo"/>
+                        <outlet property="introLabel" destination="9bh-s1-egS" id="zM4-KP-uxq"/>
                         <outlet property="videoNameLabel" destination="Peu-WJ-F9d" id="tES-MH-IMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSI-C6-0tu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2962" y="-779"/>
+            <point key="canvasLocation" x="3004" y="-618"/>
         </scene>
         <!--Mine Table View Controller-->
         <scene sceneID="FEx-4I-dHZ">
@@ -238,8 +224,16 @@
                                                 <constraint firstAttribute="height" constant="20" id="U1z-qT-VwX"/>
                                             </constraints>
                                         </imageView>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9c-pf-N8E">
+                                            <rect key="frame" x="311" y="7" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="changeAllowWWANSwitchStatus:" destination="Ohe-rg-qBq" eventType="valueChanged" id="nj4-Yy-hIO"/>
+                                            </connections>
+                                        </switch>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="J9c-pf-N8E" firstAttribute="centerY" secondItem="Cci-7X-zXg" secondAttribute="centerY" id="2Qs-bK-rKG"/>
+                                        <constraint firstAttribute="trailing" secondItem="J9c-pf-N8E" secondAttribute="trailing" constant="15" id="SaT-ps-Igl"/>
                                         <constraint firstItem="3Le-6S-ZM6" firstAttribute="centerY" secondItem="qTx-8V-qO7" secondAttribute="centerY" id="ZzR-lf-f5c"/>
                                         <constraint firstItem="Cci-7X-zXg" firstAttribute="centerY" secondItem="3Le-6S-ZM6" secondAttribute="centerY" id="eB1-sz-VdO"/>
                                         <constraint firstItem="Cci-7X-zXg" firstAttribute="leading" secondItem="3Le-6S-ZM6" secondAttribute="trailing" constant="15" id="hP0-Cl-EFu"/>
@@ -247,6 +241,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="allowWWANSwitch" destination="J9c-pf-N8E" id="Oaj-63-6vk"/>
                                     <outlet property="iconImageView" destination="3Le-6S-ZM6" id="Yd7-KG-SEZ"/>
                                     <outlet property="mineTextLabel" destination="Cci-7X-zXg" id="Fvw-Cf-yyJ"/>
                                 </connections>
@@ -260,18 +255,19 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="IVt-X2-VlT"/>
                     <connections>
-                        <segue destination="rH9-KA-pvo" kind="show" identifier="myVideosSegue" id="SmV-u6-G6g"/>
-                        <segue destination="xeJ-ai-WsI" kind="show" identifier="aboutSegue" id="bsm-H4-Obz"/>
+                        <segue destination="rH9-KA-pvo" kind="show" identifier="myVideosPageSegue" id="SmV-u6-G6g"/>
+                        <segue destination="xeJ-ai-WsI" kind="show" identifier="aboutPageSegue" id="bsm-H4-Obz"/>
+                        <segue destination="swu-zU-3mR" kind="show" identifier="helpPageSegue" id="e6L-OB-FqX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eS9-TP-0cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2129" y="338"/>
+            <point key="canvasLocation" x="2129" y="217"/>
         </scene>
-        <!--View Controller-->
+        <!--About Page View Controller-->
         <scene sceneID="PBn-V5-4av">
             <objects>
-                <viewController id="xeJ-ai-WsI" sceneMemberID="viewController">
+                <viewController id="xeJ-ai-WsI" customClass="AboutPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vaj-F6-E2A"/>
                         <viewControllerLayoutGuide type="bottom" id="doC-o3-kYa"/>
@@ -280,8 +276,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-3e-NIP">
-                                <rect key="frame" x="143" y="323" width="89" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-3e-NIP">
+                                <rect key="frame" x="32" y="107" width="303" height="479"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -290,10 +286,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="introLabel" destination="QcH-3e-NIP" id="SkC-AX-zWP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ta1-nP-plU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3004" y="910.79460269865069"/>
+            <point key="canvasLocation" x="2129" y="1079"/>
         </scene>
         <!--My Videos View Controller-->
         <scene sceneID="X1h-d6-Xeo">
@@ -407,6 +406,46 @@
             </objects>
             <point key="canvasLocation" x="3004" y="217.24137931034485"/>
         </scene>
+        <!--Help Page View Controller-->
+        <scene sceneID="jog-eL-p6s">
+            <objects>
+                <viewController id="swu-zU-3mR" customClass="HelpPageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z0N-d2-wA2"/>
+                        <viewControllerLayoutGuide type="bottom" id="fMg-KT-Jmm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4cx-Wn-t9X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-SG-BeD">
+                                <rect key="frame" x="16" y="72" width="343" height="517"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">式過可麼拉馬舞
+保過場生成城算灣戰西源一命政化走而節臺越集食坡葉人母光；有太縣國來就公外一寶費斯男樣於的國機現情來這男自在製食在，她文來、理生利！各你發山慢中一、一我星個，最上們義藥：保是直圖下告了自間養許水寶懷青作大位！
+
+前果不是些媽一然子，學來對因三打不何人：要黃達為，他因前多委講社裝？單縣制字顧男造以交，車裝！
+
+生進的低只二死，總樓自下覺時的山等？在是技設遠因心政孩要生在了。廠主們問人計臺了的負立他很品機小而流開到快業也，國黃麼？實河變國落高個像我創原像制種希在苦女車看果！希系意牛乎們笑愛動意投，現有直角後可來型樣本興信氣，養內中怎第最出，又先會比。
+
+女的相也之，倒了年中子一快國話錢裡他對長感，自服量廠主世題們指一下難強有小合生分了人出學起？種傳全有重校間，因自果之形！在得花樣校麼了落人會、下多定記例能後有師，不父綠見行的育我球動的，老超方策通巴好兒的太外；動級明越事子，之賽長員人不城化再華度告笑情的？近容價。開共教，況回發直下成系全電深集管應身不行……意指果己生，車基有我話日那快人城們示來也得統兩；家動之選的方真春小或見合體然站計、走手親和部一家用給和不真來字舉！智健員流學生後現專速，民子會近回資成廠巴他在出組故的性王算。
+
+時案都的慢藝使風續，空三用，的時二就病的屋臺新小發之業還金代能放早。又絕要，算人分像報定報！媽作制。與來信公，化代地好機者去公張到男了高好落有以半頭風每龍導字士。</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="helpTextView" destination="0cf-SG-BeD" id="HhO-8h-aHn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oQk-1n-E0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3004" y="941"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="g1z-0n-EBV">
             <objects>
@@ -443,7 +482,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sM5-pg-vcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1265" y="338"/>
+            <point key="canvasLocation" x="1265" y="217"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bmg-dz-ceX">
@@ -462,7 +501,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rrm-C0-30Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1266" y="-779"/>
+            <point key="canvasLocation" x="1265" y="-618"/>
         </scene>
     </scenes>
 </document>
