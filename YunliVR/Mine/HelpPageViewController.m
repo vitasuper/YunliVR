@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"使用帮助";
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem = barButtonItem;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.helpTextView.editable = NO;
 }

@@ -31,7 +31,11 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"YUNLI VR";
+    
     self.tableView.backgroundColor = [UIColor whiteSmoke];
+    self.tableView.scrollEnabled = NO;
 
 //    // 解决tableViewCell被NavigationBar遮住的问题
 //    CGRect rect = self.navigationController.navigationBar.frame;
@@ -98,6 +102,11 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
     
     switch (currentRealRowNumeber) {
         case 1:
+            cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MineBanner.jpg"]];
+            cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+            [cell backgroundView].clipsToBounds = YES;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             cell.iconImageView.hidden = YES;
             cell.mineTextLabel.hidden = YES;
             break;
@@ -118,11 +127,15 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
             cell.badge.radius = 8.75;
             cell.badgeRightOffset = 40;
             cell.badgeColor = [UIColor colorWithRed:0.792 green:0.197 blue:0.219 alpha:1.000];
+            
+            cell.iconImageView.image = [[UIImage imageNamed:@"video_player"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
             break;
         case 3:
             cell.mineTextLabel.text = @"仅 Wi-Fi 环境下进行下载";
             cell.allowWWANSwitch.hidden = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.iconImageView.image = [[UIImage imageNamed:@"wifi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             
             if (((AppDelegate *)[UIApplication sharedApplication].delegate).allowWWAN == YES) {
                 cell.allowWWANSwitch.on = NO;
@@ -135,11 +148,15 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
         case 4:
             cell.mineTextLabel.text = @"使用帮助";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.iconImageView.image = [[UIImage imageNamed:@"signs"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
             break;
         case 5:
             cell.mineTextLabel.text = @"关于云粒";
-            cell.iconImageView.backgroundColor = [UIColor goldColor];
+//            cell.iconImageView.backgroundColor = [UIColor goldColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.iconImageView.image = [[UIImage imageNamed:@"people"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
             break;
     }
     

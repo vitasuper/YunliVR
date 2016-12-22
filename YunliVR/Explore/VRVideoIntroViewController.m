@@ -38,8 +38,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"YUNLI VR";
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem = barButtonItem;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
     self.coverImageView.clipsToBounds = YES;
     [self loadVRVideoIntroData];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,7 +75,7 @@
                 NSLog(@"还没下好，播的是网络版。。");
             } else {
                 UIAlertController *alert;
-                alert = [UIAlertController alertControllerWithTitle:@"请检查设置" message:@"您已开启”仅 Wi-Fi 环境下进行播放/下载“功能，请到”我的“中修改相关设置" preferredStyle:UIAlertControllerStyleAlert];
+                alert = [UIAlertController alertControllerWithTitle:@"请检查设置" message:@"您已开启\"仅 Wi-Fi 环境下进行播放/下载\"功能，请到\"我的\"中修改相关设置" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *submit = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:nil];
                 [alert addAction:submit];
                 [self presentViewController:alert animated:YES completion:nil];
@@ -117,7 +124,7 @@
                 }];
                 alert = [UIAlertController alertControllerWithTitle:@"开始下载" message:@"请到 我的 -> 我的视频 查看相关下载进度" preferredStyle:UIAlertControllerStyleAlert];
             } else {
-                alert = [UIAlertController alertControllerWithTitle:@"请检查设置" message:@"您已开启”仅 Wi-Fi 环境下进行播放/下载“功能，请到”我的“中修改相关设置" preferredStyle:UIAlertControllerStyleAlert];
+                alert = [UIAlertController alertControllerWithTitle:@"请检查设置" message:@"您已开启\"仅 Wi-Fi 环境下进行播放/下载\"功能，请到\"我的\"中修改相关设置" preferredStyle:UIAlertControllerStyleAlert];
             }
         } else {
             alert = [UIAlertController alertControllerWithTitle:@"网络无法连接" message:@"请检查您当下的网络情况" preferredStyle:UIAlertControllerStyleAlert];

@@ -72,7 +72,10 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.navigationItem.title = @"我的视频";
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem = barButtonItem;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
