@@ -13,6 +13,7 @@
 #import "GVRVideoView.h"
 #import <BmobSDK/Bmob.h>
 #import <YYWebImage/YYWebImage.h>
+#import <MJRefresh.h>
 
 @interface ViewController () <GVRWidgetViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSMutableArray *photoArray;
@@ -29,6 +30,7 @@
     
     UIView *currentView;
     GVRWidgetDisplayMode currentDisplayMode;
+    BOOL refreshing;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -41,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"YunliVR";
+    self.navigationItem.title = @"YUNLI VR";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -56,6 +58,15 @@
     videoURLArray = [[NSMutableArray alloc] init];
     
     [self getVRVideoInfo];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        refreshing = YES;
+        
+        NSLog(@"TEST1: start refreshing!");
+        
+        [self getVRVideoInfo];
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +79,12 @@
 - (void)getVRVideoInfo {
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"BasicInfo"];
     // 查找表的数据
+    
+    [videoNameArray removeAllObjects];
+    [coverImgURLArray removeAllObjects];
+    [videoIntroArray removeAllObjects];
+    [videoURLArray removeAllObjects];
+    
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
             [videoNameArray addObject:[obj objectForKey:@"videoName"]];
@@ -75,6 +92,14 @@
             [coverImgURLArray addObject:[obj objectForKey:@"coverImgURL"]];
             [videoIntroArray addObject:[obj objectForKey:@"videoIntro"]];
             [videoURLArray addObject:[obj objectForKey:@"videoURL"]];;
+        }
+        
+        NSLog(@"TEST2");
+        
+        if (refreshing) {
+            refreshing = NO;
+            NSLog(@"TEST3: Stop refreshing~~");
+            [self.tableView.mj_header endRefreshing];
         }
         
         [self.tableView reloadData];
