@@ -36,14 +36,25 @@
                                     <constraint firstItem="cMS-fz-g2r" firstAttribute="leading" secondItem="CqD-sb-2fT" secondAttribute="leading" id="rrH-FW-gBR"/>
                                 </constraints>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="PhV-rN-fR2">
-                                <rect key="frame" x="168" y="315" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="PhV-rN-fR2">
+                                <rect key="frame" x="168" y="510" width="39" height="37"/>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-jV-Sth">
-                                <rect key="frame" x="172" y="552" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="GO"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YUNLI VR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pI-hp-8sA">
+                                <rect key="frame" x="122" y="80" width="132" height="37.5"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-jV-Sth">
+                                <rect key="frame" x="37" y="577" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="H8H-R6-ALe"/>
+                                    <constraint firstAttribute="width" constant="300" id="jn2-3p-f48"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="GO">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="goAction:" destination="mUO-sb-4xO" eventType="touchUpInside" id="AII-yv-OAs"/>
                                 </connections>
@@ -51,8 +62,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PhV-rN-fR2" firstAttribute="centerX" secondItem="PHW-TC-qaA" secondAttribute="centerX" id="DXU-YM-o42"/>
+                            <constraint firstItem="a0E-l5-9mm" firstAttribute="top" secondItem="ezO-jV-Sth" secondAttribute="bottom" constant="50" id="Gk5-5E-aSw"/>
                             <constraint firstItem="CqD-sb-2fT" firstAttribute="top" secondItem="PHW-TC-qaA" secondAttribute="top" id="LnF-QW-1J3"/>
+                            <constraint firstItem="5pI-hp-8sA" firstAttribute="top" secondItem="K7T-Wd-fQh" secondAttribute="bottom" constant="60" id="cKx-h8-IAN"/>
+                            <constraint firstItem="5pI-hp-8sA" firstAttribute="centerX" secondItem="PHW-TC-qaA" secondAttribute="centerX" id="gkA-7l-laB"/>
                             <constraint firstItem="CqD-sb-2fT" firstAttribute="leading" secondItem="PHW-TC-qaA" secondAttribute="leading" id="l29-Sr-HA2"/>
+                            <constraint firstItem="ezO-jV-Sth" firstAttribute="top" secondItem="PhV-rN-fR2" secondAttribute="bottom" constant="30" id="oFl-zy-miZ"/>
+                            <constraint firstItem="ezO-jV-Sth" firstAttribute="centerX" secondItem="PHW-TC-qaA" secondAttribute="centerX" id="u40-Ni-Keu"/>
                             <constraint firstAttribute="bottom" secondItem="CqD-sb-2fT" secondAttribute="bottom" id="x3H-66-HD2"/>
                             <constraint firstAttribute="trailing" secondItem="CqD-sb-2fT" secondAttribute="trailing" id="xi2-ms-8Cb"/>
                         </constraints>
@@ -60,6 +77,7 @@
                     <navigationItem key="navigationItem" id="5gl-VU-1nL"/>
                     <connections>
                         <outlet property="backgroundVRView" destination="CqD-sb-2fT" id="S77-kG-rM8"/>
+                        <outlet property="goButton" destination="ezO-jV-Sth" id="Md3-JW-dao"/>
                         <outlet property="guideScrollView" destination="cMS-fz-g2r" id="0eU-Gj-fwD"/>
                         <outlet property="pageControl" destination="PhV-rN-fR2" id="0G0-LR-EJz"/>
                         <segue destination="XtX-lp-PZh" kind="show" identifier="goSegue" id="THz-7I-FiT"/>
@@ -67,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lzA-35-OJT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-399" y="-201"/>
+            <point key="canvasLocation" x="-399.19999999999999" y="-201.04947526236884"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -89,7 +107,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="226"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQa-cA-WPf" id="rJS-XZ-P9h">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="225.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4K-eL-RG0">
@@ -208,7 +226,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ohe-rg-qBq" id="qTx-8V-qO7">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cci-7X-zXg">
@@ -262,7 +280,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eS9-TP-0cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2129" y="217"/>
+            <point key="canvasLocation" x="2129" y="216"/>
         </scene>
         <!--About Page View Controller-->
         <scene sceneID="PBn-V5-4av">
@@ -314,7 +332,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JSr-xZ-OiP" id="2mm-f8-U6a">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-c6-Kkk">
@@ -422,7 +440,7 @@
                                 <rect key="frame" x="16" y="72" width="343" height="517"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">式過可麼拉馬舞
+                                <string key="text">式過可麼拉馬舞
 保過場生成城算灣戰西源一命政化走而節臺越集食坡葉人母光；有太縣國來就公外一寶費斯男樣於的國機現情來這男自在製食在，她文來、理生利！各你發山慢中一、一我星個，最上們義藥：保是直圖下告了自間養許水寶懷青作大位！
 
 前果不是些媽一然子，學來對因三打不何人：要黃達為，他因前多委講社裝？單縣制字顧男造以交，車裝！
@@ -431,7 +449,7 @@
 
 女的相也之，倒了年中子一快國話錢裡他對長感，自服量廠主世題們指一下難強有小合生分了人出學起？種傳全有重校間，因自果之形！在得花樣校麼了落人會、下多定記例能後有師，不父綠見行的育我球動的，老超方策通巴好兒的太外；動級明越事子，之賽長員人不城化再華度告笑情的？近容價。開共教，況回發直下成系全電深集管應身不行……意指果己生，車基有我話日那快人城們示來也得統兩；家動之選的方真春小或見合體然站計、走手親和部一家用給和不真來字舉！智健員流學生後現專速，民子會近回資成廠巴他在出組故的性王算。
 
-時案都的慢藝使風續，空三用，的時二就病的屋臺新小發之業還金代能放早。又絕要，算人分像報定報！媽作制。與來信公，化代地好機者去公張到男了高好落有以半頭風每龍導字士。</mutableString>
+時案都的慢藝使風續，空三用，的時二就病的屋臺新小發之業還金代能放早。又絕要，算人分像報定報！媽作制。與來信公，化代地好機者去公張到男了高好落有以半頭風每龍導字士。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet GVRPanoramaView *backgroundVRView;
 @property (weak, nonatomic) IBOutlet UIScrollView *guideScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UIButton *goButton;
 
 @end
 
@@ -27,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [_backgroundVRView loadImage:[UIImage imageNamed:@"grand_canyon.jpg"] ofType:kGVRPanoramaImageTypeMono];
+    [self.backgroundVRView loadImage:[UIImage imageNamed:@"grand_canyon.jpg"] ofType:kGVRPanoramaImageTypeMono];
     
     // 隐藏(i)按钮
     for (UIView *v in self.backgroundVRView.subviews) {
@@ -36,13 +37,17 @@
         }
     }
     
+    // 设置GO按钮相关样式
+    [self setGoButtonStyle];
+    
+    
     // 设置引导页以及Page Control控件
     width = [[UIScreen mainScreen] bounds].size.width;
     height = [[UIScreen mainScreen] bounds].size.height;
     
     [self setGuidePages];
     
-    _guideScrollView.delegate = self;
+    self.guideScrollView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,32 +72,60 @@
 //    [super viewWillDisappear:animated];
 //}
 
-#pragma mark 设置首页引导轮播
+#pragma mark - 设置首页引导轮播
 - (void)setGuidePages {
     // 设置scrollView内容大小
-    _guideScrollView.contentSize = CGSizeMake(width * 3, height);
+    self.guideScrollView.contentSize = CGSizeMake(width * 3, height);
     
     // 将引导页图片添加到scrollView中
     for (int i = 0; i < 3; ++i) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(width * i, 0, width, height)];
-        if (i == 0) [imageView setBackgroundColor:[UIColor redColor]];
-        if (i == 1) [imageView setBackgroundColor:[UIColor greenColor]];
-        if (i == 2) [imageView setBackgroundColor:[UIColor blueColor]];
         
-        [imageView setAlpha:0.05];
-        [_guideScrollView addSubview:imageView];
+        
+        
+        if (i == 0) imageView.image = [UIImage imageNamed:@"GuidePage1"];
+        if (i == 1) imageView.image = [UIImage imageNamed:@"GuidePage2"];
+        if (i == 2) imageView.image = [UIImage imageNamed:@"GuidePage3"];
+        
+//        [imageView setAlpha:0.05];
+        [self.guideScrollView addSubview:imageView];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     int pageNum = scrollView.contentOffset.x / width;
-    _pageControl.currentPage = pageNum;
+    self.pageControl.currentPage = pageNum;
 }
 
-#pragma mark 进入的"Go"按钮
+#pragma mark - 进入的"Go"按钮样式及跳转
+
+- (void)setGoButtonStyle {
+    self.goButton.layer.borderWidth = 1.0f;
+    self.goButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    
+    [self.goButton addTarget:self action:@selector(highlightBorder) forControlEvents:UIControlEventTouchDown];
+    [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchUpInside];
+    [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchDragExit];
+    
+    
+    
+}
+
+- (void)highlightBorder {
+    self.goButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.3f] CGColor];
+}
+
+- (void)unhighlightBorder {
+    self.goButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    //additional code for an action when the button is released can go here.
+}
+
 - (IBAction)goAction:(id)sender {
     [self performSegueWithIdentifier:@"goSegue" sender:self];
 }
+
+
 
 /*
 #pragma mark - Navigation
