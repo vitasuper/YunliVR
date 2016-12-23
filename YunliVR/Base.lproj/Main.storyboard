@@ -80,7 +80,7 @@
                         <outlet property="goButton" destination="ezO-jV-Sth" id="Md3-JW-dao"/>
                         <outlet property="guideScrollView" destination="cMS-fz-g2r" id="0eU-Gj-fwD"/>
                         <outlet property="pageControl" destination="PhV-rN-fR2" id="0G0-LR-EJz"/>
-                        <segue destination="XtX-lp-PZh" kind="show" identifier="goSegue" id="THz-7I-FiT"/>
+                        <segue destination="XtX-lp-PZh" kind="modal" identifier="goSegue" id="PX0-ry-o8W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lzA-35-OJT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -469,6 +469,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XtX-lp-PZh" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="5sR-hG-qxl"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="kjS-ta-YFZ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -489,7 +490,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="njH-OW-1Be" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="Bdt-hf-lBu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NG2-J5-FXN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NG2-J5-FXN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -508,7 +509,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hWg-v5-B9T" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="1D6-MV-68f"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5Lu-OC-AZa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Lu-OC-AZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

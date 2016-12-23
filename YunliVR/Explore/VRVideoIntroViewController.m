@@ -59,7 +59,7 @@
 - (IBAction)playVRVideo:(id)sender {
     
     NSURL *url;
-    
+    [GLobalRealReachability startNotifier];
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
     
     if ([[HSDownloadManager sharedInstance] isInCache:self.videoURL]) {
@@ -100,7 +100,7 @@
 
 
 - (IBAction)downloadVRVideo:(id)sender {
-    
+    [GLobalRealReachability startNotifier];
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
     NSLog(@"Initial reachability status:%@",@(status));
     //创建一个UIAlertController对象

@@ -341,6 +341,9 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
     _timer = CreateDispatchTimer(secondsToFire, queue, ^{
         [self refreshData];
         NSLog(@"LY");
+        if ([[[HSDownloadManager sharedInstance] getTasks] count] == 0) {
+            [self cancelTimer];
+        }
     });
 }
 

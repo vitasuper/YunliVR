@@ -26,28 +26,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
-    [self.backgroundVRView loadImage:[UIImage imageNamed:@"grand_canyon.jpg"] ofType:kGVRPanoramaImageTypeMono];
-    
-    // 隐藏(i)按钮
-    for (UIView *v in self.backgroundVRView.subviews) {
-        if ([v isKindOfClass:[UIButton class]]) {
-            [v removeFromSuperview];
+    @autoreleasepool {
+        [self.backgroundVRView loadImage:[UIImage imageNamed:@"grand_canyon.jpg"] ofType:kGVRPanoramaImageTypeMono];
+        
+        // 隐藏(i)按钮
+        for (UIView *v in self.backgroundVRView.subviews) {
+            if ([v isKindOfClass:[UIButton class]]) {
+                [v removeFromSuperview];
+            }
         }
+        
+        // 设置GO按钮相关样式
+        [self setGoButtonStyle];
+        
+        // 设置引导页以及Page Control控件
+        width = [[UIScreen mainScreen] bounds].size.width;
+        height = [[UIScreen mainScreen] bounds].size.height;
+        
+        [self setGuidePages];
+        
+        self.guideScrollView.delegate = self;
     }
     
-    // 设置GO按钮相关样式
-    [self setGoButtonStyle];
-    
-    
-    // 设置引导页以及Page Control控件
-    width = [[UIScreen mainScreen] bounds].size.width;
-    height = [[UIScreen mainScreen] bounds].size.height;
-    
-    [self setGuidePages];
-    
-    self.guideScrollView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,19 +60,6 @@
     return false;
 }
 
-#pragma mark -
-
-//#pragma mark 隐藏引导页上方Navigation Bar
-//- (void)viewWillAppear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-//    [super viewWillAppear:animated];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [self.navigationController setNavigationBarHidden:NO animated:animated];
-//    [super viewWillDisappear:animated];
-//}
-
 #pragma mark - 设置首页引导轮播
 - (void)setGuidePages {
     // 设置scrollView内容大小
@@ -81,13 +69,10 @@
     for (int i = 0; i < 3; ++i) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(width * i, 0, width, height)];
         
-        
-        
         if (i == 0) imageView.image = [UIImage imageNamed:@"GuidePage1"];
         if (i == 1) imageView.image = [UIImage imageNamed:@"GuidePage2"];
         if (i == 2) imageView.image = [UIImage imageNamed:@"GuidePage3"];
         
-//        [imageView setAlpha:0.05];
         [self.guideScrollView addSubview:imageView];
     }
 }
@@ -103,13 +88,9 @@
     self.goButton.layer.borderWidth = 1.0f;
     self.goButton.layer.borderColor = [[UIColor whiteColor] CGColor];
     
-    
     [self.goButton addTarget:self action:@selector(highlightBorder) forControlEvents:UIControlEventTouchDown];
     [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchUpInside];
     [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchDragExit];
-    
-    
-    
 }
 
 - (void)highlightBorder {
@@ -118,10 +99,21 @@
 
 - (void)unhighlightBorder {
     self.goButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    //additional code for an action when the button is released can go here.
 }
 
 - (IBAction)goAction:(id)sender {
+    
+    [self.guideScrollView removeFromSuperview];
+    [self.backgroundVRView removeFromSuperview];
+    [self.pageControl removeFromSuperview];
+    [self.goButton removeFromSuperview];
+    
+    self.guideScrollView.delegate = nil;
+    self.backgroundVRView = nil;
+    self.guideScrollView = nil;
+    self.pageControl = nil;
+    self.goButton = nil;
+    
     [self performSegueWithIdentifier:@"goSegue" sender:self];
 }
 
