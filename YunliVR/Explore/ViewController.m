@@ -122,6 +122,11 @@
     VRVideoIntroTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"VRVideoIntroTableViewCell"];
     [cell coverImageView].yy_imageURL = [NSURL URLWithString:[coverImgURLArray objectAtIndex:indexPath.row]];
     
+    // 原生格式的添加圆角
+    cell.coverImageView.layer.cornerRadius = 10.0f;
+    cell.coverImageView.layer.masksToBounds = YES;
+    
+    // 切除图片超过框的部分
     [cell coverImageView].clipsToBounds = YES;
     
     return cell;
