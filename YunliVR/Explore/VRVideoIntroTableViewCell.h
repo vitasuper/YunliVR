@@ -11,5 +11,6 @@
 @interface VRVideoIntroTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
