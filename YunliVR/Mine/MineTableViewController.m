@@ -9,6 +9,7 @@
 #import "MineTableViewController.h"
 #import "MineTableViewCell.h"
 #import "HSDownloadManager.h"
+#import "XFWkwebView.h"
 #import "AppDelegate.h"
 #import <UIColor+Wonderful.h>
 
@@ -183,6 +184,8 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
     
     NSLog(@"%ld %ld currentrow:%ld", (long)indexPath.section, (long)indexPath.row, (long)currentRealRowNumeber);
     
+    
+    
     switch (currentRealRowNumeber) {
         case 1:
             break;
@@ -194,8 +197,11 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
         case 4:
             [self performSegueWithIdentifier:helpPageSegue sender:self];
             break;
-        case 5:
-            [self performSegueWithIdentifier:aboutPageSegue sender:self];
+        case 5: {
+            XFWkwebView *webView = [[XFWkwebView alloc] init];
+            [webView loadWebURLSring:@"http://www.cloudsand.cn"];
+            [self.navigationController pushViewController:webView animated:YES];
+            }
             break;
     }
     
