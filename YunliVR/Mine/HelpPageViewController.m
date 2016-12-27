@@ -23,7 +23,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.helpTextView.editable = NO;
 }
 
 - (void)didReceiveMemoryWarning {

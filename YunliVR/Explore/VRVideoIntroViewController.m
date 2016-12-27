@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *videoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *introLabel;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *downLoadButton;
 
 @end
 
@@ -46,13 +48,46 @@
     self.coverImageView.clipsToBounds = YES;
     [self loadVRVideoIntroData];
     
-    
+    [self setButtonStyle];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 两个按钮的样式
+- (void)setButtonStyle {
+    self.playButton.layer.borderWidth = 1.0f;
+    self.downLoadButton.layer.borderWidth = 1.0f;
+    
+    self.playButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.downLoadButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    [self.playButton addTarget:self action:@selector(highlightPlayButtonBorder) forControlEvents:UIControlEventTouchDown];
+    [self.playButton addTarget:self action:@selector(unhighlightPlayButtonBorder) forControlEvents:UIControlEventTouchUpInside];
+    [self.playButton addTarget:self action:@selector(unhighlightPlayButtonBorder) forControlEvents:UIControlEventTouchDragExit];
+    
+    [self.downLoadButton addTarget:self action:@selector(highlightDownloadButtonBorder) forControlEvents:UIControlEventTouchDown];
+    [self.downLoadButton addTarget:self action:@selector(unhighlightDownloadButtonBorder) forControlEvents:UIControlEventTouchUpInside];
+    [self.downLoadButton addTarget:self action:@selector(unhighlightDownloadButtonBorder) forControlEvents:UIControlEventTouchDragExit];
+    
+}
+
+- (void)highlightPlayButtonBorder {
+    self.playButton.layer.borderColor = [[UIColor grayColor] CGColor];
+}
+
+- (void)unhighlightPlayButtonBorder {
+    self.playButton.layer.borderColor = [[UIColor blackColor] CGColor];
+}
+
+- (void)highlightDownloadButtonBorder {
+    self.downLoadButton.layer.borderColor = [[UIColor grayColor] CGColor];
+}
+
+- (void)unhighlightDownloadButtonBorder {
+    self.downLoadButton.layer.borderColor = [[UIColor blackColor] CGColor];
+}
 
 #pragma mark - 播放和下载事件
 
