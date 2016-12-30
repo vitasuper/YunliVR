@@ -71,6 +71,11 @@
     [self.downLoadButton addTarget:self action:@selector(unhighlightDownloadButtonBorder) forControlEvents:UIControlEventTouchUpInside];
     [self.downLoadButton addTarget:self action:@selector(unhighlightDownloadButtonBorder) forControlEvents:UIControlEventTouchDragExit];
     
+    self.playButton.layer.cornerRadius = 5.0f;
+    self.playButton.layer.masksToBounds = YES;
+    
+    self.downLoadButton.layer.cornerRadius = 5.0f;
+    self.downLoadButton.layer.masksToBounds = YES;
 }
 
 - (void)highlightPlayButtonBorder {

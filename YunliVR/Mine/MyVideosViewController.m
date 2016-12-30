@@ -15,17 +15,26 @@
 
 // 缓存主目录
 #define HSCachesDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"HSCache"]
-
 // 保存文件名
 #define HSFileName(url) [url lastPathComponent]
-
 // 文件的存放路径（caches）
 #define HSFileFullpath(url) [HSCachesDirectory stringByAppendingPathComponent:HSFileName(url)]
-
 // 文件的已下载长度
 #define HSDownloadLength(url) [[[NSFileManager defaultManager] attributesOfItemAtPath:HSFileFullpath(url) error:nil][NSFileSize] integerValue]
 
 NSString * const qiniuURL = @"http://ogme3pxax.bkt.clouddn.com/";
+
+// Timer
+dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, dispatch_block_t block) {
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    if (timer) {
+        dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, interval * NSEC_PER_SEC), interval * NSEC_PER_SEC, (1ull * NSEC_PER_SEC) / 10);
+        dispatch_source_set_event_handler(timer, block);
+        dispatch_resume(timer);
+    }
+    return timer;
+}
+
 
 @interface MyVideosViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -38,17 +47,6 @@ NSString * const qiniuURL = @"http://ogme3pxax.bkt.clouddn.com/";
 
 @end
 
-// Timer
-dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, dispatch_block_t block) {
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    if (timer)
-    {
-        dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, interval * NSEC_PER_SEC), interval * NSEC_PER_SEC, (1ull * NSEC_PER_SEC) / 10);
-        dispatch_source_set_event_handler(timer, block);
-        dispatch_resume(timer);
-    }
-    return timer;
-}
 
 @implementation MyVideosViewController {
     dispatch_source_t _timer;
@@ -115,6 +113,7 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 刷新两个tableView section的方法
 - (void)refreshDownloadingSectionData {
     NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
@@ -140,20 +139,16 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
             [self.downloadingVideoArray addObject:item];
         }
     }
+    
     NSInteger downloadingNewCnt = [self.downloadingVideoArray count];
     
     if (downloadingOldCnt == downloadingNewCnt && downloadingNewCnt != 0) {
-//        [self.tableView reloadData];
         [self updateCellComponent];
     }
-//
+    
     if (downloadedOldCnt != downloadedNewCnt) {
         [self.tableView reloadData];
     }
-
-//    [self.tableView reloadData];
-    
-    
 }
 
 - (void)updateCellComponent {
@@ -168,8 +163,6 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
         if (visibleIndex.section == 0) {
             MyVideosTableViewCell *cell = (MyVideosTableViewCell *)[self.tableView cellForRowAtIndexPath:visibleIndex];
             cell.videoTitleLabel.text = [self.downloadingVideoArray objectAtIndex:visibleIndex.row];
-        //        cell.coverImageView.yy_imageURL = [self.taskCoverImgUrls objectAtIndex:indexPath.row];
-        //        NSLog(@"%@", [self.taskCoverImgUrls objectAtIndex:indexPath.row]);
             cell.downloadingProgressView.progress = [[HSDownloadManager sharedInstance] progress:[self.downloadingVideoArray objectAtIndex:visibleIndex.row]];
         
             cell.currentCellUrl = [qiniuURL stringByAppendingPathComponent:[self.downloadingVideoArray objectAtIndex:visibleIndex.row]];
@@ -180,7 +173,7 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
                 cell.currentStatusLabel.text = @"暂停";
             }
         
-            cell.downloadingProgressTextLabel.text = [NSString stringWithFormat:@"%ldKB", (long)[[HSDownloadManager sharedInstance] fileLocalTotalLength:[self.downloadingVideoArray objectAtIndex:visibleIndex.row]]];
+            cell.downloadingProgressTextLabel.text = [NSString stringWithFormat:@"%.2fMB", [[HSDownloadManager sharedInstance] fileLocalTotalLength:[self.downloadingVideoArray objectAtIndex:visibleIndex.row]] / 1024.0 / 1024.0];
             cell.currentDownloadingSpeedLabel.hidden = TRUE;
             cell.coverImageView.yy_imageURL = [NSURL URLWithString:[cell.currentCellUrl stringByAppendingString:@".jpg"]];
             cell.currentStatusLabel.hidden = FALSE;
@@ -203,11 +196,6 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 20.0;
 }
-
-// 修改footer的颜色
-//- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-//    view.tintColor = [UIColor lightGrayColor];
-//}
 
 // cell中每一行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -233,15 +221,10 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 
 #pragma mark 显示内容 & 点击事件
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    NSInteger currentRealRowNumeber = (indexPath.section > 0 ? [self tableView:tableView numberOfRowsInSection:indexPath.section - 1] : 0) + indexPath.row + 1;
-    
     MyVideosTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MyVideosTableViewCell" forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
         cell.videoTitleLabel.text = [self.downloadingVideoArray objectAtIndex:indexPath.row];
-//        cell.coverImageView.yy_imageURL = [self.taskCoverImgUrls objectAtIndex:indexPath.row];
-//        NSLog(@"%@", [self.taskCoverImgUrls objectAtIndex:indexPath.row]);
         cell.downloadingProgressView.progress = [[HSDownloadManager sharedInstance] progress:[self.downloadingVideoArray objectAtIndex:indexPath.row]];
         
         cell.currentCellUrl = [qiniuURL stringByAppendingPathComponent:[self.downloadingVideoArray objectAtIndex:indexPath.row]];
@@ -252,13 +235,12 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
             cell.currentStatusLabel.text = @"暂停";
         }
         
-        cell.downloadingProgressTextLabel.text = [NSString stringWithFormat:@"%ldKB", (long)[[HSDownloadManager sharedInstance] fileLocalTotalLength:[self.downloadingVideoArray objectAtIndex:indexPath.row]]];
+        cell.downloadingProgressTextLabel.text = [NSString stringWithFormat:@"%.2fMB", [[HSDownloadManager sharedInstance] fileLocalTotalLength:[self.downloadingVideoArray objectAtIndex:indexPath.row]] / 1024.0 / 1024.0];
         cell.currentDownloadingSpeedLabel.hidden = TRUE;
         cell.coverImageView.yy_imageURL = [NSURL URLWithString:[cell.currentCellUrl stringByAppendingString:@".jpg"]];
         cell.currentStatusLabel.hidden = FALSE;
         cell.downloadingProgressView.hidden = FALSE;
         cell.currentDownloadingSpeedLabel.hidden = TRUE;
-        
         
     } else if (indexPath.section == 1) {
         cell.videoTitleLabel.text = [[self.downloadedVideoArray objectAtIndex:indexPath.row] lastPathComponent];
@@ -283,11 +265,10 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
         } state:^(DownloadState state) {
             // ...
         }];
+        [self startTimer];
         
     } else if (indexPath.section == 1) {
-//        NSString *currentCellUrl = [qiniuURL stringByAppendingPathComponent:[self.downloadedVideoArray objectAtIndex:indexPath.row]];
         NSURL *url = [NSURL fileURLWithPath:[HSCachesDirectory stringByAppendingPathComponent:[self.downloadedVideoArray objectAtIndex:indexPath.row]]];
-//        NSLog(@"%@", [HSCachesDirectory stringByAppendingPathComponent:[self.downloadedVideoArray objectAtIndex:indexPath.row]]);
         
         Video360ViewController *videoController = [[Video360ViewController alloc] initWithNibName:@"HTY360PlayerVC" bundle:nil url:url];
         
@@ -314,7 +295,7 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 }
 
 // 设置删除事件
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         if (indexPath.section == 0) {
             // 正在下载的
@@ -350,22 +331,10 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 - (void)cancelTimer {
     if (_timer) {
         dispatch_source_cancel(_timer);
-        // Remove this if you are on a Deployment Target of iOS6 or OSX 10.8 and above
-//        dispatch_release(_timer);
+        
         NSLog(@"停下来Timer啦！");
         _timer = nil;
     }
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

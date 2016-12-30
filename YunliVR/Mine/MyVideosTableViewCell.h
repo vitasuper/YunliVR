@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentDownloadingSpeedLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadingProgressView;
 
-
 @property (nonatomic, strong) NSString *currentCellUrl;
 
 

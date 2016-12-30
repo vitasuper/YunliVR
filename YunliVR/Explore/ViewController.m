@@ -15,30 +15,54 @@
 #import <YYWebImage/YYWebImage.h>
 #import <MJRefresh.h>
 
-@interface ViewController () <GVRWidgetViewDelegate, UITableViewDataSource, UITableViewDelegate> {
-    NSMutableArray *photoArray;
-    
-    NSMutableArray *videoNameArray;
-    NSMutableArray *coverImgURLArray;
-    NSMutableArray *videoIntroArray;
-    NSMutableArray *videoURLArray;
-    
-    NSString *videoName;
-    NSString *coverImgURL;
-    NSString *videoIntro;
-    NSString *videoURL;
-    
-    UIView *currentView;
-    GVRWidgetDisplayMode currentDisplayMode;
-    BOOL refreshing;
-}
+@interface ViewController () <GVRWidgetViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) NSMutableArray *videoNameArray;
+@property (nonatomic, strong) NSMutableArray *coverImgURLArray;
+@property (nonatomic, strong) NSMutableArray *videoIntroArray;
+@property (nonatomic, strong) NSMutableArray *videoURLArray;
+
+@property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *coverImgURL;
+@property (nonatomic, copy) NSString *videoIntro;
+@property (nonatomic, copy) NSString *videoURL;
+
+@property (nonatomic, assign) BOOL refreshing;
+
 @end
+
 
 @implementation ViewController
 
+- (NSMutableArray *)videoNameArray {
+    if (!_videoNameArray) {
+        _videoNameArray = [[NSMutableArray alloc] init];
+    }
+    return _videoNameArray;
+}
+
+- (NSMutableArray *)coverImgURLArray {
+    if (!_coverImgURLArray) {
+        _coverImgURLArray = [[NSMutableArray alloc] init];
+    }
+    return _coverImgURLArray;
+}
+
+- (NSMutableArray *)videoIntroArray {
+    if (!_videoIntroArray) {
+        _videoIntroArray = [[NSMutableArray alloc] init];
+    }
+    return _videoIntroArray;
+}
+
+- (NSMutableArray *)videoURLArray {
+    if (!_videoURLArray) {
+        _videoURLArray = [[NSMutableArray alloc] init];
+    }
+    return _videoURLArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,26 +72,13 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    photoArray = [[NSMutableArray alloc] initWithObjects:@"sindhu_beach.jpg", @"grand_canyon.jpg", @"underwater.jpg", nil];
-
-    currentDisplayMode = kGVRWidgetDisplayModeEmbedded;
-    
-    videoNameArray = [[NSMutableArray alloc] init];
-    coverImgURLArray = [[NSMutableArray alloc] init];
-    videoIntroArray = [[NSMutableArray alloc] init];
-    videoURLArray = [[NSMutableArray alloc] init];
-    
     [self getVRVideoInfo];
     self.tableView.separatorStyle = NO;
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        refreshing = YES;
-        
-        NSLog(@"TEST1: start refreshing!");
-        
+        self.refreshing = YES;
         [self getVRVideoInfo];
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,34 +89,27 @@
 #pragma mark - 读取后端数据表
 
 - (void)getVRVideoInfo {
+    [self.videoNameArray removeAllObjects];
+    [self.coverImgURLArray removeAllObjects];
+    [self.videoIntroArray removeAllObjects];
+    [self.videoURLArray removeAllObjects];
+    
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"BasicInfo"];
-    // 查找表的数据
-    
-    [videoNameArray removeAllObjects];
-    [coverImgURLArray removeAllObjects];
-    [videoIntroArray removeAllObjects];
-    [videoURLArray removeAllObjects];
-    
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
-            [videoNameArray addObject:[obj objectForKey:@"videoName"]];
-            NSLog(@"%@", [obj objectForKey:@"videoName"]);
-            [coverImgURLArray addObject:[obj objectForKey:@"coverImgURL"]];
-            [videoIntroArray addObject:[obj objectForKey:@"videoIntro"]];
-            [videoURLArray addObject:[obj objectForKey:@"videoURL"]];;
+            [self.videoNameArray addObject:[obj objectForKey:@"videoName"]];
+            [self.coverImgURLArray addObject:[obj objectForKey:@"coverImgURL"]];
+            [self.videoIntroArray addObject:[obj objectForKey:@"videoIntro"]];
+            [self.videoURLArray addObject:[obj objectForKey:@"videoURL"]];;
         }
         
-        NSLog(@"TEST2");
-        
-        if (refreshing) {
-            refreshing = NO;
-            NSLog(@"TEST3: Stop refreshing~~");
+        if (self.refreshing) {
+            self.refreshing = NO;
             [self.tableView.mj_header endRefreshing];
         }
         
         [self.tableView reloadData];
     }];
-    
 }
 
 
@@ -116,7 +120,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return coverImgURLArray.count;
+    return self.coverImgURLArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,35 +129,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VRVideoIntroTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"VRVideoIntroTableViewCell"];
-    [cell coverImageView].yy_imageURL = [NSURL URLWithString:[coverImgURLArray objectAtIndex:indexPath.row]];
-    
-//    // 原生格式的添加圆角
-//    cell.coverImageView.layer.cornerRadius = 10.0f;
-//    cell.coverImageView.layer.masksToBounds = YES;
+    [cell coverImageView].yy_imageURL = [NSURL URLWithString:[self.coverImgURLArray objectAtIndex:indexPath.row]];
     
     // 切除图片超过框的部分
     [cell coverImageView].clipsToBounds = YES;
     
-    cell.titleLabel.text = [videoNameArray objectAtIndex:indexPath.row];
+    cell.titleLabel.text = [self.videoNameArray objectAtIndex:indexPath.row];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    videoName = [videoNameArray objectAtIndex:indexPath.row];
-    coverImgURL = [coverImgURLArray objectAtIndex:indexPath.row];
-    videoIntro = [videoIntroArray objectAtIndex:indexPath.row];
-    videoURL = [videoURLArray objectAtIndex:indexPath.row];
+    self.videoName = [self.videoNameArray objectAtIndex:indexPath.row];
+    self.coverImgURL = [self.coverImgURLArray objectAtIndex:indexPath.row];
+    self.videoIntro = [self.videoIntroArray objectAtIndex:indexPath.row];
+    self.videoURL = [self.videoURLArray objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"toVRVideoIntroSegue" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toVRVideoIntroSegue"]) {
         VRVideoIntroViewController *dest = segue.destinationViewController;
-        dest.coverImgURL = coverImgURL;
-        dest.videoIntro = videoIntro;
-        dest.videoName = videoName;
-        dest.videoURL = videoURL;
+        dest.coverImgURL = self.coverImgURL;
+        dest.videoIntro = self.videoIntro;
+        dest.videoName = self.videoName;
+        dest.videoURL = self.videoURL;
     }
 }
 

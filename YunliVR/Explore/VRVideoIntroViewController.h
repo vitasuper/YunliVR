@@ -11,9 +11,9 @@
 
 @interface VRVideoIntroViewController : UIViewController
 
-@property(nonatomic, weak) NSString *coverImgURL;
-@property(nonatomic, weak) NSString *videoIntro;
-@property(nonatomic, weak) NSString *videoName;
-@property(nonatomic, weak) NSString *videoURL;
+@property (nonatomic, copy) NSString *coverImgURL;
+@property (nonatomic, copy) NSString *videoIntro;
+@property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *videoURL;
 
 @end

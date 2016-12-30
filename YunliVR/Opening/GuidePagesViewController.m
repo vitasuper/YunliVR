@@ -45,15 +45,12 @@
         height = [[UIScreen mainScreen] bounds].size.height;
         
         [self setGuidePages];
-        
         self.guideScrollView.delegate = self;
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)shouldAutorotate {
@@ -91,6 +88,9 @@
     [self.goButton addTarget:self action:@selector(highlightBorder) forControlEvents:UIControlEventTouchDown];
     [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchUpInside];
     [self.goButton addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchDragExit];
+    
+    self.goButton.layer.cornerRadius = 5.0f;
+    self.goButton.layer.masksToBounds = YES;
 }
 
 - (void)highlightBorder {
@@ -102,7 +102,6 @@
 }
 
 - (IBAction)goAction:(id)sender {
-    
     [self.guideScrollView removeFromSuperview];
     [self.backgroundVRView removeFromSuperview];
     [self.pageControl removeFromSuperview];
@@ -116,17 +115,5 @@
     
     [self performSegueWithIdentifier:@"goSegue" sender:self];
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
