@@ -114,6 +114,7 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 }
 
 #pragma mark - 刷新两个tableView section的方法
+
 - (void)refreshDownloadingSectionData {
     NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];

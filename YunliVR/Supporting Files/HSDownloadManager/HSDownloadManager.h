@@ -103,17 +103,6 @@
 
 - (BOOL)isRunning:(NSString *)url;
 
-
-/**
- 通过视频url来获取对应的缩略图的url
-
- @param url 下载地址
- @return 下载地址对应的缩略图的地址
- */
-- (NSString *)getCoverImgUrlByVideoUrl:(NSString *)url;
-
-
-
 /**
  *  根据url获取对应的下载信息模型
  */

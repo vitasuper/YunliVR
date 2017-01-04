@@ -71,40 +71,35 @@
     return _taskCoverImgUrls;
 }
 
-- (NSMutableDictionary *)tasks
-{
+- (NSMutableDictionary *)tasks {
     if (!_tasks) {
         _tasks = [NSMutableDictionary dictionary];
     }
     return _tasks;
 }
 
-- (NSMutableDictionary *)completedTasks
-{
+- (NSMutableDictionary *)completedTasks {
     if (!_completedTasks) {
         _completedTasks = [NSMutableDictionary dictionary];
     }
     return _completedTasks;
 }
 
-- (NSMutableDictionary *)coverImgDict
-{
+- (NSMutableDictionary *)coverImgDict {
     if (!_coverImgDict) {
         _coverImgDict = [NSMutableDictionary dictionary];
     }
     return _coverImgDict;
 }
 
-- (NSMutableDictionary *)isCompletedDict
-{
+- (NSMutableDictionary *)isCompletedDict {
     if (!_isCompletedDict) {
         _isCompletedDict = [NSMutableDictionary dictionary];
     }
     return _isCompletedDict;
 }
 
-- (NSMutableDictionary *)sessionModels
-{
+- (NSMutableDictionary *)sessionModels {
     if (!_sessionModels) {
         _sessionModels = [NSMutableDictionary dictionary];
     }
@@ -114,8 +109,7 @@
 
 static HSDownloadManager *_downloadManager;
 
-+ (instancetype)allocWithZone:(struct _NSZone *)zone
-{
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
@@ -125,13 +119,11 @@ static HSDownloadManager *_downloadManager;
     return _downloadManager;
 }
 
-- (nonnull id)copyWithZone:(nullable NSZone *)zone
-{
+- (nonnull id)copyWithZone:(nullable NSZone *)zone {
     return _downloadManager;
 }
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _downloadManager = [[self alloc] init];
@@ -143,8 +135,7 @@ static HSDownloadManager *_downloadManager;
 /**
  *  创建缓存目录文件
  */
-- (void)createCacheDirectory
-{
+- (void)createCacheDirectory {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:HSCachesDirectory]) {
         [fileManager createDirectoryAtPath:HSCachesDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
@@ -154,8 +145,7 @@ static HSDownloadManager *_downloadManager;
 /**
  *  开启任务下载资源
  */
-- (void)download:(NSString *)url coverImgUrl:(NSString *)taskCoverImgUrl progress:(void (^)(NSInteger, NSInteger, CGFloat))progressBlock state:(void (^)(DownloadState))stateBlock
-{
+- (void)download:(NSString *)url coverImgUrl:(NSString *)taskCoverImgUrl progress:(void (^)(NSInteger, NSInteger, CGFloat))progressBlock state:(void (^)(DownloadState))stateBlock {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!url) return;
@@ -218,8 +208,7 @@ static HSDownloadManager *_downloadManager;
     });
 }
 
-- (void)handle:(NSString *)url
-{
+- (void)handle:(NSString *)url {
     NSURLSessionDataTask *task = [self getTask:url];
     if (task.state == NSURLSessionTaskStateRunning) {
         [self pause:url];
@@ -231,17 +220,16 @@ static HSDownloadManager *_downloadManager;
 - (BOOL)isRunning:(NSString *)url {
     NSURLSessionDataTask *task = [self getTask:url];
     if (task.state == NSURLSessionTaskStateRunning) {
-        return TRUE;
+        return YES;
     } else {
-        return FALSE;
+        return NO;
     }
 }
 
 /**
  *  开始下载
  */
-- (void)start:(NSString *)url
-{
+- (void)start:(NSString *)url {
     NSURLSessionDataTask *task = [self getTask:url];
     [task resume];
 
@@ -251,8 +239,7 @@ static HSDownloadManager *_downloadManager;
 /**
  *  暂停下载
  */
-- (void)pause:(NSString *)url
-{
+- (void)pause:(NSString *)url {
     NSLog(@"DEBUG4: 要暂停的url: %@", url);
     
     NSURLSessionDataTask *task = [self getTask:url];
@@ -265,24 +252,21 @@ static HSDownloadManager *_downloadManager;
 /**
  *  根据url获得对应的下载任务
  */
-- (NSURLSessionDataTask *)getTask:(NSString *)url
-{
+- (NSURLSessionDataTask *)getTask:(NSString *)url {
     return (NSURLSessionDataTask *)[self.tasks valueForKey:HSFileName(url)];
 }
 
 /**
  *  根据url获取对应的下载信息模型
  */
-- (HSSessionModel *)getSessionModel:(NSUInteger)taskIdentifier
-{
+- (HSSessionModel *)getSessionModel:(NSUInteger)taskIdentifier {
     return (HSSessionModel *)[self.sessionModels valueForKey:@(taskIdentifier).stringValue];
 }
 
 /**
  *  判断该文件是否下载完成
  */
-- (BOOL)isCompletion:(NSString *)url
-{
+- (BOOL)isCompletion:(NSString *)url {
     if ([self fileTotalLength:url] && HSDownloadLength(url) == [self fileTotalLength:url]) {
         return YES;
     }
@@ -292,24 +276,21 @@ static HSDownloadManager *_downloadManager;
 /**
  *  查询该资源的下载进度值
  */
-- (CGFloat)progress:(NSString *)url
-{
+- (CGFloat)progress:(NSString *)url {
     return [self fileTotalLength:url] == 0 ? 0.0 : 1.0 * HSDownloadLength(url) /  [self fileTotalLength:url];
 }
 
 /**
  *  获取该资源总大小
  */
-- (NSInteger)fileTotalLength:(NSString *)url
-{
+- (NSInteger)fileTotalLength:(NSString *)url {
     return [[NSDictionary dictionaryWithContentsOfFile:HSTotalLengthFullpath][HSFileName(url)] integerValue];
 }
 
 /**
  *  获取本地资源总大小
  */
-- (NSInteger)fileLocalTotalLength:(NSString *)localUrl
-{
+- (NSInteger)fileLocalTotalLength:(NSString *)localUrl {
     return [[NSDictionary dictionaryWithContentsOfFile:HSTotalLengthFullpath][localUrl] integerValue];
 }
 
@@ -317,8 +298,7 @@ static HSDownloadManager *_downloadManager;
 /**
  *  删除该资源
  */
-- (void)deleteFile:(NSString *)url
-{
+- (void)deleteFile:(NSString *)url {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:HSFileFullpath(url)]) {
         [self handle:url];
@@ -375,8 +355,7 @@ static HSDownloadManager *_downloadManager;
 /**
  *  清空所有下载资源 - 未完成
  */
-- (void)deleteAllFile
-{
+- (void)deleteAllFile {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:HSCachesDirectory]) {
         // 删除沙盒中所有资源
@@ -469,8 +448,7 @@ static HSDownloadManager *_downloadManager;
 /**
  * 接收到响应
  */
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSHTTPURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
-{
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSHTTPURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
     
     HSSessionModel *sessionModel = [self getSessionModel:dataTask.taskIdentifier];
     
@@ -494,8 +472,7 @@ static HSDownloadManager *_downloadManager;
 /**
  * 接收到服务器返回的数据
  */
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-{
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     HSSessionModel *sessionModel = [self getSessionModel:dataTask.taskIdentifier];
     
     // 写入数据
@@ -514,8 +491,7 @@ static HSDownloadManager *_downloadManager;
 /**
  * 请求完毕（成功|失败）
  */
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-{
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     HSSessionModel *sessionModel = [self getSessionModel:task.taskIdentifier];
     if (!sessionModel) return;
     

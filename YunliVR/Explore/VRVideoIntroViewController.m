@@ -16,10 +16,8 @@
 
 // 缓存主目录
 #define HSCachesDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"HSCache"]
-
 // 保存文件名
 #define HSFileName(url) [url lastPathComponent]
-
 // 文件的存放路径（caches）
 #define HSFileFullpath(url) [HSCachesDirectory stringByAppendingPathComponent:HSFileName(url)]
 
@@ -56,6 +54,7 @@
 }
 
 #pragma mark - 两个按钮的样式
+
 - (void)setButtonStyle {
     self.playButton.layer.borderWidth = 1.0f;
     self.downLoadButton.layer.borderWidth = 1.0f;
@@ -138,7 +137,6 @@
     }
 }
 
-
 - (IBAction)downloadVRVideo:(id)sender {
     [GLobalRealReachability startNotifier];
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
@@ -169,7 +167,6 @@
         } else {
             alert = [UIAlertController alertControllerWithTitle:@"网络无法连接" message:@"请检查您当下的网络情况" preferredStyle:UIAlertControllerStyleAlert];
         }
-        
     }
     
     // 创建一个确定按钮及其点击触发事件
@@ -181,7 +178,6 @@
     // 显示弹窗
     [self presentViewController:alert animated:YES completion:nil];
 }
-
 
 #pragma mark - 加载传过来的数据
 

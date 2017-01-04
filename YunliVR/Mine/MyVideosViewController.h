@@ -6,8 +6,8 @@
 //  Copyright © 2016年 vitasuper. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MyVideosViewController : ViewController
+@interface MyVideosViewController : UIViewController
 
 @end

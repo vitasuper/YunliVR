@@ -103,7 +103,6 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
             
             if (badgeCnt > 0) {
                 cell.badgeString = [NSString stringWithFormat:@"%lu", (unsigned long)badgeCnt];
-                NSLog(@"current count is : %lu", badgeCnt);
             } else {
                 cell.badgeString = nil;
             }

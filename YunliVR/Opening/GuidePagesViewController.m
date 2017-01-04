@@ -58,6 +58,7 @@
 }
 
 #pragma mark - 设置首页引导轮播
+
 - (void)setGuidePages {
     // 设置scrollView内容大小
     self.guideScrollView.contentSize = CGSizeMake(width * 3, height);
