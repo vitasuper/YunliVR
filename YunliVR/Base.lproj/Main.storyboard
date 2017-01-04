@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mUO-sb-4xO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mUO-sb-4xO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,7 +40,7 @@
                                 <rect key="frame" x="168" y="510" width="39" height="37"/>
                             </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YUNLI VR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pI-hp-8sA">
-                                <rect key="frame" x="122" y="80" width="132" height="37.5"/>
+                                <rect key="frame" x="122" y="80" width="132" height="38"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="32"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="-399.19999999999999" y="-201.04947526236884"/>
         </scene>
-        <!--View Controller-->
+        <!--Explore View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ExploreViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -103,20 +103,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VRVideoIntroTableViewCell" id="aQa-cA-WPf" customClass="VRVideoIntroTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExploreTableViewCell" id="aQa-cA-WPf" userLabel="ExploreTableViewCell" customClass="ExploreTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="226"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQa-cA-WPf" id="rJS-XZ-P9h">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="225.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W4K-eL-RG0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="225.5"/>
-                                                </imageView>
-                                                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skE-cd-ZuN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="225.5"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Paz-7A-Jr3">
+                                                    <rect key="frame" x="5" y="5" width="365" height="215"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W4K-eL-RG0">
+                                                    <rect key="frame" x="5" y="5" width="365" height="215"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW8-Zk-e67">
                                                     <rect key="frame" x="155" y="95" width="66" height="36"/>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="25"/>
@@ -127,19 +127,20 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="W4K-eL-RG0" secondAttribute="trailing" id="4Te-9y-n3b"/>
-                                                <constraint firstAttribute="bottom" secondItem="W4K-eL-RG0" secondAttribute="bottom" id="5lC-3c-va1"/>
+                                                <constraint firstItem="Paz-7A-Jr3" firstAttribute="top" secondItem="rJS-XZ-P9h" secondAttribute="top" constant="5" id="3W7-th-6FD"/>
+                                                <constraint firstItem="Paz-7A-Jr3" firstAttribute="leading" secondItem="rJS-XZ-P9h" secondAttribute="leading" constant="5" id="4T8-El-AqS"/>
+                                                <constraint firstAttribute="trailing" secondItem="W4K-eL-RG0" secondAttribute="trailing" constant="5" id="8YM-7Z-Vj8"/>
+                                                <constraint firstItem="W4K-eL-RG0" firstAttribute="leading" secondItem="rJS-XZ-P9h" secondAttribute="leading" constant="5" id="HDN-2f-xAu"/>
                                                 <constraint firstItem="BW8-Zk-e67" firstAttribute="centerX" secondItem="rJS-XZ-P9h" secondAttribute="centerX" id="Iig-wZ-5tG"/>
                                                 <constraint firstItem="BW8-Zk-e67" firstAttribute="centerY" secondItem="rJS-XZ-P9h" secondAttribute="centerY" id="Irq-d7-qUx"/>
-                                                <constraint firstItem="skE-cd-ZuN" firstAttribute="leading" secondItem="rJS-XZ-P9h" secondAttribute="leading" id="ZQv-ic-4uh"/>
-                                                <constraint firstAttribute="bottom" secondItem="skE-cd-ZuN" secondAttribute="bottom" id="heg-WR-u9g"/>
-                                                <constraint firstItem="W4K-eL-RG0" firstAttribute="top" secondItem="rJS-XZ-P9h" secondAttribute="top" id="rwE-QC-ra0"/>
-                                                <constraint firstItem="skE-cd-ZuN" firstAttribute="top" secondItem="rJS-XZ-P9h" secondAttribute="top" id="u1C-Ge-grn"/>
-                                                <constraint firstItem="W4K-eL-RG0" firstAttribute="leading" secondItem="rJS-XZ-P9h" secondAttribute="leading" id="uJg-Rs-wAo"/>
-                                                <constraint firstAttribute="trailing" secondItem="skE-cd-ZuN" secondAttribute="trailing" id="ytP-07-DQV"/>
+                                                <constraint firstAttribute="bottom" secondItem="Paz-7A-Jr3" secondAttribute="bottom" constant="5" id="bXw-AC-cdZ"/>
+                                                <constraint firstItem="W4K-eL-RG0" firstAttribute="top" secondItem="rJS-XZ-P9h" secondAttribute="top" constant="5" id="gLT-ON-F16"/>
+                                                <constraint firstAttribute="trailing" secondItem="Paz-7A-Jr3" secondAttribute="trailing" constant="5" id="q07-Hc-CTX"/>
+                                                <constraint firstAttribute="bottom" secondItem="W4K-eL-RG0" secondAttribute="bottom" constant="5" id="uwO-ck-2mJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="backgroundShadowView" destination="Paz-7A-Jr3" id="L4j-pj-XUc"/>
                                             <outlet property="coverImageView" destination="W4K-eL-RG0" id="ega-dY-XWk"/>
                                             <outlet property="titleLabel" destination="BW8-Zk-e67" id="Jig-u7-8Us"/>
                                         </connections>
@@ -158,7 +159,7 @@
                     <navigationItem key="navigationItem" id="ppn-hc-Ga3"/>
                     <connections>
                         <outlet property="tableView" destination="mYl-Sr-GjR" id="OVt-De-ySu"/>
-                        <segue destination="Li6-yL-tP8" kind="push" identifier="toVRVideoIntroSegue" id="8pJ-IX-R3Z"/>
+                        <segue destination="Li6-yL-tP8" kind="show" identifier="toVRVideoIntroSegue" id="8pJ-IX-R3Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -249,17 +250,16 @@
                                     <action selector="downloadVRVideo:" destination="Li6-yL-tP8" eventType="touchUpInside" id="gNd-dD-leY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bh-s1-egS">
-                                <rect key="frame" x="51" y="375" width="282" height="167"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 思一光来风矿，住风且" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-WJ-F9d">
+                                <rect key="frame" x="20" y="329" width="335" height="28"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-WJ-F9d">
-                                <rect key="frame" x="51" y="342" width="256" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bh-s1-egS">
+                                <rect key="frame" x="20" y="367" width="335" height="137.5"/>
+                                <string key="text">验目它可想报代，一红问量江县，料B除办孤。 响须着适土走江群它，千身并派采矿形，等色刷王示从离。 的方安战东去从外越，没果斗世张两不美，习争E别县门术。 程山专现发问单图速真叫路，当商此素次下听任许们就院，列少孟伶见住几镰。 记连成质于又，问正林保性调，计屈资成。 义根具外十过具较切图他，图于把立回体马所布，持平4都低验芹么影。</string>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -267,11 +267,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K9w-Xr-mNR" firstAttribute="leading" secondItem="mTX-8i-z2Y" secondAttribute="leading" id="0FZ-jD-9pB"/>
+                            <constraint firstItem="9bh-s1-egS" firstAttribute="leading" secondItem="mTX-8i-z2Y" secondAttribute="leading" constant="20" id="8XH-Vm-qzS"/>
                             <constraint firstItem="K9w-Xr-mNR" firstAttribute="top" secondItem="o4k-gU-1K8" secondAttribute="bottom" id="9vA-9T-J21"/>
                             <constraint firstAttribute="trailing" secondItem="yDn-e0-Pwj" secondAttribute="trailing" constant="40" id="R26-zh-I6q"/>
+                            <constraint firstItem="9bh-s1-egS" firstAttribute="top" secondItem="Peu-WJ-F9d" secondAttribute="bottom" constant="10" id="bBc-TB-mmC"/>
+                            <constraint firstAttribute="trailing" secondItem="9bh-s1-egS" secondAttribute="trailing" constant="20" id="exY-s0-cjq"/>
                             <constraint firstItem="UH8-z5-rsw" firstAttribute="leading" secondItem="mTX-8i-z2Y" secondAttribute="leading" constant="40" id="jaA-5B-c9b"/>
                             <constraint firstAttribute="trailing" secondItem="K9w-Xr-mNR" secondAttribute="trailing" id="k8q-0i-hyh"/>
+                            <constraint firstItem="Peu-WJ-F9d" firstAttribute="leading" secondItem="mTX-8i-z2Y" secondAttribute="leading" constant="20" id="oB1-fX-LSG"/>
+                            <constraint firstItem="Peu-WJ-F9d" firstAttribute="top" secondItem="K9w-Xr-mNR" secondAttribute="bottom" constant="15" id="swC-Kb-Thy"/>
                             <constraint firstItem="cy5-8x-0OR" firstAttribute="top" secondItem="yDn-e0-Pwj" secondAttribute="bottom" constant="30" id="uCk-gI-Wxx"/>
+                            <constraint firstAttribute="trailing" secondItem="Peu-WJ-F9d" secondAttribute="trailing" constant="20" id="uvp-IM-BBx"/>
                             <constraint firstItem="cy5-8x-0OR" firstAttribute="top" secondItem="UH8-z5-rsw" secondAttribute="bottom" constant="30" id="xyI-Yk-hr5"/>
                         </constraints>
                     </view>
@@ -301,7 +307,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ohe-rg-qBq" id="qTx-8V-qO7">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cci-7X-zXg">
@@ -407,7 +413,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JSr-xZ-OiP" id="2mm-f8-U6a">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-c6-Kkk">
@@ -524,38 +530,38 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q: 分屏看起来显得屏幕好小，怎么办？" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ku-KC-bHS">
-                                                <rect key="frame" x="20" y="30" width="335" height="25.5"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
+                                                <rect key="frame" x="20" y="30" width="335" height="24"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q: 如何使用VR眼镜观看视频？" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLm-Mv-voU">
-                                                <rect key="frame" x="20" y="184" width="335" height="25.5"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
+                                                <rect key="frame" x="20" y="187.5" width="335" height="24"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q: 播放视频时总是黑屏或者卡顿如何处理？" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOU-aU-zQG">
-                                                <rect key="frame" x="20" y="317.5" width="335" height="50.5"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
+                                                <rect key="frame" x="20" y="325.5" width="335" height="24"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将视频左右分屏，是为了在使用VR眼镜的时候，通过左右眼的视觉差来产生3D效果。若要观看全屏视频，请点击播放器进度条右边的“分屏”按钮，切换即进入全屏模式。" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d76-Ak-zJ7">
-                                                <rect key="frame" x="20" y="70" width="335" height="84"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="15"/>
+                                                <rect key="frame" x="20" y="69" width="335" height="78.5"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击视频进行播放之后，点击播放器进度条右边的“分屏”按钮，切换进入全屏模式。随后将手机横放入VR眼镜，即可开始享受VR视频带来的魅力。" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWV-7m-xMa">
-                                                <rect key="frame" x="20" y="224.5" width="335" height="63"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="15"/>
+                                                <rect key="frame" x="20" y="226.5" width="335" height="59"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在线观看视频时，请保持网络的畅通。若出现缓冲过久或者黑屏、卡顿的情况，请检查网络配置。由于全景视频大小普遍较大，推荐在使用 Wi-Fi 情况下进行观看，或者下载完成之后再进行观看，以获得更好的观看体验。" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wN9-Eo-hB1">
-                                                <rect key="frame" x="20" y="383" width="335" height="105"/>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="15"/>
+                                                <rect key="frame" x="20" y="364.5" width="335" height="98"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -575,12 +581,12 @@
                                             <constraint firstAttribute="trailing" secondItem="NOU-aU-zQG" secondAttribute="trailing" constant="20" id="VJI-lz-FX6"/>
                                             <constraint firstItem="hbK-qb-As5" firstAttribute="centerX" secondItem="U0R-Xk-6Mo" secondAttribute="centerX" id="XrB-xe-mLR"/>
                                             <constraint firstAttribute="trailing" secondItem="d76-Ak-zJ7" secondAttribute="trailing" constant="20" id="Y3p-0t-dpl"/>
-                                            <constraint firstItem="dLm-Mv-voU" firstAttribute="top" secondItem="d76-Ak-zJ7" secondAttribute="bottom" constant="30" id="adr-ve-XFa"/>
+                                            <constraint firstItem="dLm-Mv-voU" firstAttribute="top" secondItem="d76-Ak-zJ7" secondAttribute="bottom" constant="40" id="adr-ve-XFa"/>
                                             <constraint firstItem="dLm-Mv-voU" firstAttribute="leading" secondItem="U0R-Xk-6Mo" secondAttribute="leading" constant="20" id="bnB-eP-gXN"/>
                                             <constraint firstItem="3ku-KC-bHS" firstAttribute="leading" secondItem="U0R-Xk-6Mo" secondAttribute="leading" constant="20" id="bwX-yx-PhH"/>
                                             <constraint firstAttribute="trailing" secondItem="gWV-7m-xMa" secondAttribute="trailing" constant="20" id="l9y-G5-l6A"/>
                                             <constraint firstItem="gWV-7m-xMa" firstAttribute="top" secondItem="dLm-Mv-voU" secondAttribute="bottom" constant="15" id="qdJ-CK-kmF"/>
-                                            <constraint firstItem="NOU-aU-zQG" firstAttribute="top" secondItem="gWV-7m-xMa" secondAttribute="bottom" constant="30" id="vkk-bW-7hp"/>
+                                            <constraint firstItem="NOU-aU-zQG" firstAttribute="top" secondItem="gWV-7m-xMa" secondAttribute="bottom" constant="40" id="vkk-bW-7hp"/>
                                             <constraint firstItem="gWV-7m-xMa" firstAttribute="leading" secondItem="U0R-Xk-6Mo" secondAttribute="leading" constant="20" id="wv7-Qc-I10"/>
                                             <constraint firstAttribute="height" constant="1000" id="z9P-oG-MI8"/>
                                         </constraints>
