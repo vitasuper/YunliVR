@@ -1,5 +1,5 @@
 //
-//  VRVideoIntroTableViewCell.h
+//  ExploreTableViewCell.h
 //  YunliVR
 //
 //  Created by 韩龙粤 on 2016/11/16.
@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VRVideoIntroTableViewCell : UITableViewCell
+@interface ExploreTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIView *backgroundShadowView;
 
 @end

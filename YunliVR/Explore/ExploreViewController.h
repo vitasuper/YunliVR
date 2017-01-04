@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ExploreViewController.h
 //  YunliVR
 //
 //  Created by 韩龙粤 on 2016/11/7.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ExploreViewController : UIViewController
 
 @end

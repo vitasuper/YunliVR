@@ -1,13 +1,13 @@
 //
-//  ViewController.m
+//  ExploreViewController.m
 //  YunliVR
 //
 //  Created by 韩龙粤 on 2016/11/7.
 //  Copyright © 2016年 vitasuper. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "VRVideoIntroTableViewCell.h"
+#import "ExploreViewController.h"
+#import "ExploreTableViewCell.h"
 #import "VRVideoIntroViewController.h"
 #import "GVRPanoramaView.h"
 #import "GVRVideoView.h"
@@ -15,7 +15,7 @@
 #import <YYWebImage/YYWebImage.h>
 #import <MJRefresh.h>
 
-@interface ViewController () <GVRWidgetViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ExploreViewController () <GVRWidgetViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -34,7 +34,7 @@
 @end
 
 
-@implementation ViewController
+@implementation ExploreViewController
 
 - (NSMutableArray *)videoNameArray {
     if (!_videoNameArray) {
@@ -85,7 +85,6 @@
     [super didReceiveMemoryWarning];
 }
 
-
 #pragma mark - 读取后端数据表
 
 - (void)getVRVideoInfo {
@@ -128,11 +127,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VRVideoIntroTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"VRVideoIntroTableViewCell"];
+    ExploreTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExploreTableViewCell"];
     [cell coverImageView].yy_imageURL = [NSURL URLWithString:[self.coverImgURLArray objectAtIndex:indexPath.row]];
+    
+    CGFloat cornerRadius = 3.0f;
     
     // 切除图片超过框的部分
     [cell coverImageView].clipsToBounds = YES;
+    
+    cell.coverImageView.layer.cornerRadius = cornerRadius;
+    cell.coverImageView.layer.masksToBounds = YES;
+    
+    
+    // 图片阴影：给图片下面加一层view，然后让view产生阴影
+    // 这样可以避免图片不能同时出现圆角和阴影的问题
+    // 参考：http://stackoverflow.com/questions/11724517/add-round-corner-to-uiimageview-and-display-shadow-effect
+    cell.backgroundShadowView.layer.cornerRadius = cornerRadius;
+    cell.backgroundShadowView.layer.masksToBounds = NO;
+    
+    cell.backgroundShadowView.layer.shadowOffset = CGSizeMake(0, 0);
+    cell.backgroundShadowView.layer.shadowOpacity = 0.5;
+    cell.backgroundShadowView.layer.shadowRadius = 2.0f;
+    cell.backgroundShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
     
     cell.titleLabel.text = [self.videoNameArray objectAtIndex:indexPath.row];
     
