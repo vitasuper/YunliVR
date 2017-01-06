@@ -116,7 +116,7 @@ NSString * const aboutPageSegue = @"aboutPageSegue";
             break;
             
         case 3:
-            cell.mineTextLabel.text = @"仅 Wi-Fi 环境下进行下载";
+            cell.mineTextLabel.text = @"仅 Wi-Fi 环境下进行下载/播放";
             cell.allowWWANSwitch.hidden = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.iconImageView.image = [[UIImage imageNamed:@"wifi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

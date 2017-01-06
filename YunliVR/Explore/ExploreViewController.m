@@ -10,7 +10,6 @@
 #import "ExploreTableViewCell.h"
 #import "VRVideoIntroViewController.h"
 #import "GVRPanoramaView.h"
-#import "GVRVideoView.h"
 #import <BmobSDK/Bmob.h>
 #import <YYWebImage/YYWebImage.h>
 #import <MJRefresh.h>
@@ -108,6 +107,9 @@
         }
         
         [self.tableView reloadData];
+        [self.tableView setNeedsLayout];
+        [self.tableView layoutIfNeeded];
+        [self.tableView reloadData];
     }];
 }
 
@@ -130,14 +132,16 @@
     ExploreTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExploreTableViewCell"];
     [cell coverImageView].yy_imageURL = [NSURL URLWithString:[self.coverImgURLArray objectAtIndex:indexPath.row]];
     
+    cell.videoTitleLabel.text = [self.videoNameArray objectAtIndex:indexPath.row];
+    cell.videoIntroLabel.text = [self.videoIntroArray objectAtIndex:indexPath.row];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     CGFloat cornerRadius = 3.0f;
-    
-    // 切除图片超过框的部分
+    // 给图片加圆角
     [cell coverImageView].clipsToBounds = YES;
-    
     cell.coverImageView.layer.cornerRadius = cornerRadius;
     cell.coverImageView.layer.masksToBounds = YES;
-    
     
     // 图片阴影：给图片下面加一层view，然后让view产生阴影
     // 这样可以避免图片不能同时出现圆角和阴影的问题
@@ -145,12 +149,20 @@
     cell.backgroundShadowView.layer.cornerRadius = cornerRadius;
     cell.backgroundShadowView.layer.masksToBounds = NO;
     
-    cell.backgroundShadowView.layer.shadowOffset = CGSizeMake(0, 0);
-    cell.backgroundShadowView.layer.shadowOpacity = 0.5;
+    cell.backgroundShadowView.layer.shadowOffset = CGSizeMake(0.5, 0.5);
+    cell.backgroundShadowView.layer.shadowOpacity = 0.7;
     cell.backgroundShadowView.layer.shadowRadius = 2.0f;
     cell.backgroundShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
     
-    cell.titleLabel.text = [self.videoNameArray objectAtIndex:indexPath.row];
+    cell.infoBackgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
+    
+    // 给下方的信息label加两个圆角
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:cell.infoBackgroundView.bounds byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) cornerRadii:CGSizeMake(3.0, 3.0)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.view.bounds;
+    maskLayer.path  = maskPath.CGPath;
+    cell.infoBackgroundView.layer.mask = maskLayer;
     
     return cell;
 }
@@ -160,6 +172,7 @@
     self.coverImgURL = [self.coverImgURLArray objectAtIndex:indexPath.row];
     self.videoIntro = [self.videoIntroArray objectAtIndex:indexPath.row];
     self.videoURL = [self.videoURLArray objectAtIndex:indexPath.row];
+    
     [self performSegueWithIdentifier:@"toVRVideoIntroSegue" sender:self];
 }
 
